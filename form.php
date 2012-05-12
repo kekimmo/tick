@@ -25,7 +25,7 @@ function form () {
 		$confirmed = array_key_exists('confirm', $_POST);
 
 		if ($ordered || $confirmed) {
-			$errors = validate($dbh, $_POST);
+			$errors = validate($dbh, $_POST, $ordered);
 			if ($errors) {
 				return order_form($_POST, $errors);
 			}
@@ -70,16 +70,19 @@ function order ($dbh, $data) {
 		'postoffice' => $order->postoffice
 	);
 
-	$mail_to = sprintf('%s <%s>',
-			$order->name, $order->email);
+	$mail_to = sprintf('=?UTF-8?B?%s?= <%s>',
+			base64_encode($order->name), $order->email);
 
-	$mail_headers = sprintf("From: %s\r\n",
+	$mail_headers = sprintf(
+		"MIME-Version: 1.0\r\n" .
+		"Content-Type: text/plain; charset=UTF-8\r\n" .
+		"From: %s\r\n",
 			Config::MAIL_FROM);
 
 	$mail_text = fill_file(
 			'templates/mail/order_confirmation.txt', $v);
 
-	$mailed = mail($mail_to, Config::MAIL_SUBJECT,
+	$mailed = mail($mail_to, '=?UTF-8?B?' . base64_encode(Config::MAIL_SUBJECT) . '?=',
 			$mail_text, $mail_headers);
 
 	if (!$mailed) {
@@ -91,8 +94,6 @@ function order ($dbh, $data) {
 	return fill_file('templates/entered.html',
 			array_map('htmlspecialchars', $v));
 }
-
-print form();
 
 
 ?>

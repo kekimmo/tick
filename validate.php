@@ -148,7 +148,7 @@ function s_get_reply ($socket) {
 }
 
 
-function validate ($dbh, $data) {
+function validate ($dbh, $data, $smtp_check = true) {
 	$tickets_available = tickets_available($dbh);
 
 	$v = array(
@@ -161,8 +161,10 @@ function validate ($dbh, $data) {
 			'missing' => 'missing',
 			'too_long' => longer_than(Config::MAXLEN_EMAIL),
 			//'no_at' => assuming_exists(does_not_contain('@')),
-			'not_working' => assuming_exists(function ($email) {
-				return !smtp_ok($email);
+			'not_working' => assuming_exists(function ($email) use ($smtp_check) {
+				return ($smtp_check
+					? !smtp_ok($email)
+					: false);
 			})
 		)),
 
