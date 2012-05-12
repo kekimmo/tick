@@ -1,0 +1,44 @@
+
+id (primary key)
+name
+email
+street
+postcode
+postoffice
+quantity
+cost
+entered (can be NULL)
+paid (can be NULL)
+mailed (can be NULL)
+
+
+== Queries ==
+
+by refnum
+not paid
+not mailed
+disputed
+
+
+== Updates ==
+
+Enter order
+	lock
+	confirm amount available
+	enter order
+	unlock
+
+Mark as paid
+	note date marked as paid
+
+Mark as mailed
+	note date marked as mailed
+
+
+== Helpers ==
+
+mailingAddress()
+	name
+	street
+	postcode postoffice
+

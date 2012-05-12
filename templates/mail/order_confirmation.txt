@@ -1,0 +1,11 @@
+
+Tervehdys, %name%!
+
+Tekemäsi %quantity% lipun tilaus on vastaanotettu.
+
+Liput postitetaan, kun maksu näkyy tilillämme. Maksutiedot alla.
+
+ Tilinumero: FI00 0000 0000 0000 0000
+Viitenumero: %refnum%
+      Summa: %cost% €
+

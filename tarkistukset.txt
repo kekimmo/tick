@@ -1,0 +1,21 @@
+
+== Yhteystiedot ==
+
+Nimi ei tyhjä
+Katuosoite ei tyhjä
+Postinumero ei tyhjä
+Postinumero olemassa
+Postitoimipaikka ei tyhjä
+Postitoimipaikka olemassa ja vastaa postinumeroa
+Katuosoite löytyy postinumeron alueelta?
+Sähköpostiosoite ei tyhjä
+Sähköpostiosoite muodollisesti oikea
+Sähköpostiosoitteen domain olemassa (ja DNS toimii)
+
+
+== Tilaustiedot ==
+
+Tilattu M lippua, jäljellä J lippua
+	M >= 1
+	M <= J
+

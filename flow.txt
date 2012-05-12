@@ -1,0 +1,28 @@
+
+= Lipun osto =
+
+Lippuja jäljellä J
+Näytä varauslomake, jos J > 0
+Kysy määrä 1 <= M <= J
+[Varaa M lippua, jos 1 <= M <= J]
+Kysy nimi, osoite ja sähköpostiosoite
+Luo viitenumero
+Anna maksutiedot, ilmoita määräaika maksulle
+Lisää tilaus[, poista varaus]
+Lähetä tilausvahvistus
+
+
+= Maksun tarkistaminen =
+
+//Kysy viitenumeroita
+//Näytä viitenumeroiden perusteella löydetyt tilaukset
+Näytä lista maksamattomista
+Merkitse valitut tilaukset maksetuiksi
+
+
+= Lipun postitus =
+
+Näytä lista maksetuista tilauksista
+Merkitse valitut tilaukset postitetuiksi
+Lähetä postitusilmoitukset ja ohjeet katoamisen (myös saavuttua) varalle
+
