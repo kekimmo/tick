@@ -1,6 +1,9 @@
 <?php
 
 
+require_once('order_config.php');
+
+
 function missing ($data) {
 	return $data === null || $data === '';
 }
@@ -45,7 +48,7 @@ function assuming_exists ($test) {
 }
 
 
-function assuming ($condition, $test) {
+function assuming_passed ($condition, $test) {
 	return function ($data) use ($condition, $test) {
 		return !$condition($data) && $test($data);
 	};
@@ -60,7 +63,7 @@ function smtp_ok ($email) {
 
 	$hostname = substr($email, $pos + 1);
 	$mxs = array();
-	$found = getmxrr($hostname, $mxs);
+	$found = @getmxrr($hostname, $mxs);
 	if (!$found) {
 		$mxs = array($hostname);
 	}
@@ -69,16 +72,14 @@ function smtp_ok ($email) {
 	foreach ($mxs as $host) {
 		$errno = 0;
 		$errstr = '';
-		$s = fsockopen($host, 25, $errno, $errstr, Config::VALIDATE_SOCKET_TIMEOUT);
+		$s = @fsockopen($host, 25, $errno, $errstr, Config::VALIDATE_SOCKET_TIMEOUT);
 		if ($s !== FALSE) {
 			$ok = smtp_ok_at_host($s, $email);
 			fclose($s);
 			if ($ok) {
-				//printf('%s: OK!<br>', $host);
 				return true;
 			}
 		}
-		//printf('%s: FAIL<br>', $host);
 	}
 
 	return false;
@@ -148,6 +149,11 @@ function s_get_reply ($socket) {
 }
 
 
+function too_many ($n) {
+	return $n > Config::MAX_QUANTITY;
+}
+
+
 function validate ($dbh, $data, $smtp_check = true) {
 	$tickets_available = tickets_available($dbh);
 
@@ -192,10 +198,11 @@ function validate ($dbh, $data, $smtp_check = true) {
 					function ($n) {
 						return $n < 1;
 					})),
-			'too_many' => assuming_exists(assuming_numbers(
+			'too_many' => assuming_exists(assuming_numbers('too_many')),
+			'not_available' => assuming_exists(assuming_numbers(assuming_passed('too_many',
 					function ($n) use ($tickets_available) {
 						return $n > $tickets_available;
-					}))
+					})))
 		))
 	);
 

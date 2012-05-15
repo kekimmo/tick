@@ -1,6 +1,6 @@
 <?php
 
-require_once('config.php');
+require_once('order_config.php');
 require_once('db.php');
 require_once('order.php');
 
@@ -21,7 +21,21 @@ function tickets_ordered ($dbh) {
 }
 
 
-function order_enter ($dbh, $quantity, $name, $email, $street, $postcode, $postoffice) {
+function order_already_entered ($dbh, $confirm_id) {
+	$sql = 'SELECT id FROM orders WHERE confirm_id = :confirm_id';
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute(array('confirm_id' => $confirm_id));
+	$id = $stmt->fetchColumn();
+	if ($id !== false) {
+		return intval($id);
+	}
+	else {
+		return null;
+	}
+}
+
+
+function order_enter ($dbh, $quantity, $name, $email, $street, $postcode, $postoffice, $confirm_id) {
 	$sql = 'INSERT INTO orders SET
 		quantity = :quantity,
 		cost = :cost,
@@ -29,16 +43,19 @@ function order_enter ($dbh, $quantity, $name, $email, $street, $postcode, $posto
 		email = :email,
 		street = :street,
 		postcode = :postcode,
-		postoffice = :postoffice';
+		postoffice = :postoffice,
+		confirm_id = :confirm_id';
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute(array(
 		':quantity' => $quantity,
-		':cost' => $quantity * Config::TICKET_PRICE,
+		':cost' => Order::cost($quantity),
 		':name' => $name,
 		':email' => $email,
 		':street' => $street,
 		':postcode' => $postcode,
-		':postoffice' => $postoffice));
+		':postoffice' => $postoffice,
+		':confirm_id' => $confirm_id
+	));
 	return intval($dbh->lastInsertId());
 }
 
@@ -82,4 +99,3 @@ function order_by_id ($dbh, $id) {
 
 
 ?>
-

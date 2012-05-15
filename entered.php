@@ -21,4 +21,3 @@ function entered ($order) {
 
 
 ?>
-

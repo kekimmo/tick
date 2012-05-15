@@ -1,5 +1,7 @@
 <?php
 
+require_once('order_config.php');
+
 
 class Order {
 	var $id;
@@ -13,8 +15,16 @@ class Order {
 	var $entered;
 	var $paid;
 	var $mailed;
+
+
+	static function cost ($quantity) {
+		return $quantity * Config::TICKET_PRICE + Config::POSTAGE;
+	}
+
+	function due () {
+		return Config::due($this->entered);
+	}
 };
 
 
 ?>
-

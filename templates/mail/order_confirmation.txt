@@ -1,11 +1,21 @@
 
-Tervehdys, %name%!
+Tervetuloa Yamaconiin, %name%!
 
 Tekemäsi %quantity% lipun tilaus on vastaanotettu.
 
-Liput postitetaan, kun maksu näkyy tilillämme. Maksutiedot alla.
+Maksutiedot ohessa. Postitamme tilauksen 2 viikon sisällä siitä, kun
+maksu näkyy tilillämme. Ilmoitamme sähköpostilla, kun tilaus on
+postissa. Mikäli haluat liput mahdollisimman nopeasti, vaihda
+eräpäiväksi tämä päivä.
 
- Tilinumero: FI00 0000 0000 0000 0000
+Jos tilausta ei makseta eräpäivään mennessä, se peruuntuu.
+
+ Tilinumero: %account%
 Viitenumero: %refnum%
       Summa: %cost% €
+   Eräpäivä: %due%
+
+Virtuaaliviivakoodi (sisältää kaikki ylläolevat tiedot, ks.
+<http://fi.wikipedia.org/wiki/Virtuaaliviivakoodi>):
+%barcode%
 

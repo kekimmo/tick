@@ -1,16 +1,31 @@
+<div class="order_system">
 <p>Tilaus kirjattu.</p>
-<h2>Tilaustiedot</h2>
+<h3>Tilaustiedot</h3>
 <dl>
-	<dt>Määrä</dt><dd>%quantity%</dd> 
-	<dt>Hinta</dt><dd>%cost%</dd> 
-	<dt>Nimi</dt><dd>%name%</dd> 
+	<dt>Lippumäärä</dt><dd>%quantity%</dd> 
+	<dt>Hinta (sis. toimituskulut %postage% €)</dt><dd>%cost% €</dd> 
 	<dt>Sähköpostiosoite</dt><dd>%email%</dd> 
-	<dt>Toimitusosoite</dt><dd>%street%, %postcode% %postoffice%</dd> 
+	<dt>Toimitusosoite</dt><dd>%name%<br>%street%<br>%postcode% %postoffice%</dd> 
 </dl>
-<h2>Maksutiedot</h2>
+<h3>Maksutiedot</h3>
 <dl>
-	<dt>Tili</dt><dd>XX00 0000 0000 0000 0000</dd>
+	<dt>Tili</dt><dd>%account%</dd>
 	<dt>Viite</dt><dd>%refnum%</dd>
 	<dt>Summa</dt><dd>%cost% €</dd>
+	<dt>Eräpäivä</dt><dd>%due%</dd>
+	<dt>
+		<a href="http://fi.wikipedia.org/wiki/Virtuaaliviivakoodi">Virtuaaliviivakoodi</a>
+		<span class="extra_info">(nopeuttaa verkkopankissa maksamista)</span>
+	</dt>
+	<dd>%barcode%</dd>
 </dl>
+<p>
+	Postitamme tilauksen 2 viikon sisällä siitä, kun maksu näkyy tilillämme.
+	Ilmoitamme sähköpostilla, kun tilaus on postissa.
+	Mikäli haluat liput mahdollisimman nopeasti, vaihda eräpäiväksi tämä päivä.
+</p>
+<p>
+	Jos tilausta ei makseta eräpäivään mennessä, se peruuntuu.
+</p>
+</div>
 

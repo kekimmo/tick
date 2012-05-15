@@ -1,0 +1,44 @@
+
+form.order {
+	display: table;
+	border-collapse: collapse;
+}
+
+
+form.order .field {
+	display: table-row;
+}
+
+
+form.order label, form.order input, form.order .errors {
+	display: table-cell;
+	margin: 0 1ex;
+	vertical-align: middle;
+}
+
+form.order input.submit {
+	display: inline;
+}
+
+
+form.order label {
+	text-align: right;
+}
+
+form.order .errors {
+	color: #f00;
+}
+
+form.order .error {
+	background-color: #fdd;
+}
+
+
+.order_system dt {
+	font-weight: bold;
+}
+
+.order_system dt .extra_info {
+	font-weight: normal;
+}
+

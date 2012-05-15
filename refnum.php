@@ -1,7 +1,55 @@
 <?php
 
 
-require_once('config.php');
+require_once('order_config.php');
+
+
+class BarcodeException extends Exception {};
+
+
+// <http://www.fkl.fi/teemasivut/sepa/tekninen_dokumentaatio/Dokumentit/Pankkiviivakoodi_v052.pdf>
+// Code version 4 (IBAN account number, national reference number)
+function barcode ($sum, $refnum, $due, $iban_numeric = null) {
+	if ($iban_numeric === null) {
+		$iban_numeric = Config::ACCOUNT_NUMBER_NUMERIC;
+	}
+	// Remove whitespace
+	$iban_numeric = str_replace(' ', '', $iban_numeric);
+	$refnum = str_replace(' ', '', $refnum);
+
+	// Specified lengths for sanity checks
+	$lengths = array(
+		'version'      => 1,
+		'iban_numeric' => 16,
+		'eur'          => 6,
+		'c'            => 2,
+		'reserved'     => 3,
+		'refnum'       => 20,
+		'due'          => 6
+	);
+
+	$parts = array(
+		'version'      => '4',
+		'iban_numeric' => $iban_numeric,
+		'eur'          => sprintf('%06d', $sum / 100),
+		'c'            => sprintf('%02d', $sum % 100), 
+		'reserved'     => '000',
+		'refnum'       => str_pad($refnum, 20, '0', STR_PAD_LEFT),
+		'due'          => date('ymd', $due)
+	);
+
+	// Construct code parts
+	foreach ($parts as $part => $value) {
+		$required_length = $lengths[$part];
+		if (strlen($value) != $required_length) {
+			throw new BarcodeException(sprintf(
+				'Computed value %s for %s is not of required length %d.',
+				$value, $part, $required_length));
+		}
+	}
+
+	return join('', $parts);
+}
 
 
 class RefnumException extends Exception {};
@@ -99,4 +147,3 @@ function refnum_checksum ($refnum) {
 
 
 ?>
-
