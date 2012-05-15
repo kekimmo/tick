@@ -14,8 +14,6 @@ function order_system () {
 	try {
 		$dbh = db_connect();
 
-		$dbh->exec('LOCK TABLES orders WRITE');
-
 		$tickets_available = tickets_available($dbh);
 
 		if ($tickets_available < 1) {
@@ -50,10 +48,6 @@ function order_system () {
 	catch (PDOException $e) {
 		error_log('[Orders] Database error: ' . $e);
 		return '<p>Tietokantavirhe.</p>';
-	}
-
-	if ($dbh !== FALSE) {
-		$dbh->exec('UNLOCK TABLES;');
 	}
 }
 
