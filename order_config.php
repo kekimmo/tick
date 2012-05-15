@@ -21,9 +21,9 @@ class Config {
 	const MAIL_FROM = 'Yamaconin lipunmyynti <liput@yamacon.fi>';
 
 	const DB_HOST = 'localhost';
-	const DB_USER = 'yamacon_test';
-	const DB_PASS = 'test';
-	const DB_NAME = 'yamacon_test';
+	const DB_USER = 'yamacon_orders';
+	const DB_PASS = 'Gohn6ohG';
+	const DB_NAME = 'yamacon_orders';
 
 	const VALIDATE_FQDN = 'yamacon.fi';
 	const VALIDATE_FROM = '<>';

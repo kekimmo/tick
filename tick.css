@@ -1,7 +1,6 @@
 
 form.order {
 	display: table;
-	border-collapse: collapse;
 }
 
 
@@ -23,6 +22,7 @@ form.order input.submit {
 
 form.order label {
 	text-align: right;
+	padding-right: 1ex;
 }
 
 form.order .errors {
@@ -33,6 +33,15 @@ form.order .error {
 	background-color: #fdd;
 }
 
+
+form.order #quantity {
+	text-align: right;
+}
+
+
+.order_system {
+	padding-bottom: 1em;
+}
 
 .order_system dt {
 	font-weight: bold;

@@ -55,7 +55,7 @@ function order_form ($prefilled = array(), $errors = array()) {
 
 	$tf = array();
 	foreach (array(
-			array('quantity', 'Lippujen määrä', 3, 1),
+			array('quantity', 'Lippujen määrä', 2, 1),
 			array('name', 'Tilaajan nimi', Config::MAXLEN_NAME, ''),
 			array('email', 'Sähköpostiosoite', Config::MAXLEN_EMAIL, ''),
 			array('street', 'Katuosoite', Config::MAXLEN_STREET, ''),
