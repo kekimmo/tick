@@ -10,8 +10,8 @@ class Config {
 	// Maximum amount of tickets in a single order
 	const MAX_QUANTITY = 20;
 
-	const ACCOUNT_NUMBER = 'FI32 5238 3650 0176 73';
-	const ACCOUNT_NUMBER_NUMERIC = '32 5238 3650 0176 73';
+	const ACCOUNT_NUMBER = 'FI00 0000 0000 0000 00';
+	const ACCOUNT_NUMBER_NUMERIC = '00 0000 0000 0000 00';
 	const REFNUM_PREFIX = '12';
 	static function due ($order_entered) {
 		return strtotime('+2 weeks', $order_entered);
@@ -21,16 +21,16 @@ class Config {
 	const MAIL_FROM = 'Yamaconin lipunmyynti <liput@yamacon.fi>';
 
 	const DB_HOST = 'localhost';
-	const DB_USER = 'yamacon_orders';
-	const DB_PASS = 'Gohn6ohG';
-	const DB_NAME = 'yamacon_orders';
+	const DB_USER = 'yamacon_test';
+	const DB_PASS = 'test';
+	const DB_NAME = 'yamacon_test';
 
 	const VALIDATE_FQDN = 'yamacon.fi';
 	const VALIDATE_FROM = '<>';
 	const VALIDATE_SOCKET_TIMEOUT = 5;
 
-	const BASE_DIR = '/srv/http/yamacon.fi/tick';
-	const TMPL_DIR = '/srv/http/yamacon.fi/tick/templates';
+	const BASE_DIR = '/srv/http/yamacon.fi/testing-tick';
+	const TMPL_DIR = '/srv/http/yamacon.fi/testing-tick/templates';
 
 	const MAXLEN_NAME = 50; 
 	const MAXLEN_EMAIL = 255; 
