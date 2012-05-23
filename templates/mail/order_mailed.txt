@@ -1,0 +1,8 @@
+
+Tervetuloa Yamaconiin, %name%!
+
+Tekemäsi %quantity% lipun tilaus on postitettu %mailed%. Kirje saapunee
+2-3 päivän sisällä.
+
+Ongelmatapauksissa ota yhteyttä: <liput@yamacon.fi>
+

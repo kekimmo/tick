@@ -17,7 +17,9 @@ class Config {
 		return strtotime('+2 weeks', $order_entered);
 	}
 
-	const MAIL_SUBJECT = '[Yamacon] Tilausvahvistus';
+	const MAIL_ENTERED_SUBJECT = '[Yamacon] Tilausvahvistus';
+	const MAIL_PAID_SUBJECT = '[Yamacon] Maksu saatu';
+	const MAIL_MAILED_SUBJECT = '[Yamacon] Tilaus postitettu';
 	const MAIL_FROM = 'Yamaconin lipunmyynti <liput@yamacon.fi>';
 
 	const DB_HOST = 'localhost';

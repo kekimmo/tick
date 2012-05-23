@@ -1,0 +1,38 @@
+
+.time_null {
+	color: red;
+}
+
+
+table {
+	border-collapse: collapse;	
+}
+
+tbody tr {
+	background-color: #efe;
+}
+
+tbody tr.pending {
+	background-color: #fff;
+}
+
+
+tbody tr:hover {
+	background-color: #eef;
+}
+
+
+th,td {
+	padding: 0.5ex 1.5ex;
+	border-top: 0.2ex solid;
+	border-bottom: 0.2ex solid;
+}
+
+td.quantity, td.cost, td.entered, td.paid, td.mailed {
+	text-align: right;
+}
+
+a.action, a.action:visited {
+	color: #00f;
+}
+

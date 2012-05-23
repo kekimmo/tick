@@ -8,6 +8,8 @@ require_once('queries.php');
 require_once('validate.php');
 require_once('template.php');
 require_once('forms.php');
+require_once('mail.php');
+require_once('order.php');
 
 
 function order_system () {
@@ -65,26 +67,15 @@ function order ($dbh, $data) {
 	$order = order_by_id($dbh, $id);
 
 	$v = order_data($order);
-
-	$mail_to = sprintf('=?UTF-8?B?%s?= <%s>',
-			base64_encode($order->name), $order->email);
-
-	$mail_headers = sprintf(
-		"MIME-Version: 1.0\r\n" .
-		"Content-Type: text/plain; charset=UTF-8\r\n" .
-		"From: %s\r\n",
-			Config::MAIL_FROM);
-
 	$mail_text = fill_file(
-			Config::TMPL_DIR . '/mail/order_confirmation.txt', $v);
+			Config::TMPL_DIR . '/mail/order_entered.txt', $v);
 
-	$mailed = mail($mail_to, '=?UTF-8?B?' . base64_encode(Config::MAIL_SUBJECT) . '?=',
-			$mail_text, $mail_headers);
+	$mailed = order_mail($order->email, $order->name, Config::MAIL_ENTERED_SUBJECT, $mail_text);
 
 	if (!$mailed) {
 		error_log(sprintf(
 			'[Orders] Mailing confirmation for order %d to %s failed.',
-			$order->id, $email));
+			$order->id, $order->email));
 	}
 
 	return order_entered($v);
@@ -94,26 +85,6 @@ function order ($dbh, $data) {
 function order_entered ($v) {
 	return fill_file(Config::TMPL_DIR . '/entered.html',
 			array_map('htmlspecialchars', $v));
-}
-
-
-function order_data ($order) {
-	$refnum = refnum_from_id($order->id);
-	$due = $order->due();
-	return array(
-		'refnum' => $refnum,
-		'quantity' => $order->quantity,
-		'cost' => Config::money_fmt($order->cost),
-		'postage' => Config::money_fmt(Config::POSTAGE),
-		'name' => $order->name,
-		'email' => $order->email,
-		'street' => $order->street,
-		'postcode' => $order->postcode,
-		'postoffice' => $order->postoffice,
-		'account' => Config::ACCOUNT_NUMBER,
-		'due' => date('j.n.Y', $due),
-		'barcode' => barcode($order->cost, $refnum, $due)
-	);
 }
 
 
